@@ -5,24 +5,19 @@ import org.jeasy.rules.api.Facts;
 
 /**
  * @author alexouyang
- * @Date 2019-07-24
+ * 2019-07-24
  */
 @Rule
 public class GenderRule {
 
-    private StringBuilder sb;
-
-    public GenderRule(StringBuilder sb) {
-        this.sb = sb;
-    }
-
     @Condition
     public boolean onlyMale(@Fact("gender") String gender ){
-        return gender.equalsIgnoreCase("male")?true:false;
+        return gender.equalsIgnoreCase("male");
     }
 
     @Action
     public void printGender(Facts facts){
+        StringBuilder sb = facts.get("sb");
         sb.append("gender is " + facts.get("gender") +", pass GenderRule" + "\n");
     }
 

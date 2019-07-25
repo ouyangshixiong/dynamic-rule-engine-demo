@@ -1,6 +1,6 @@
 name: "salary rule"
 description: "工资大于1000不要"
-priority: 2
+priority: 20
 condition: "salary <= 1000"
 actions:
-  - "System.out.println(\"YAML Rule: salary=\"+ salary +\" matched\");"
+  - "((StringBuilder)sb).append(\"YAML Rule: salary=\"+ salary +\" matched\");"

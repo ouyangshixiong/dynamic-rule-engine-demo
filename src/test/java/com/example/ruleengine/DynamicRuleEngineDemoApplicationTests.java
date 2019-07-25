@@ -31,8 +31,9 @@ public class DynamicRuleEngineDemoApplicationTests {
     public void basicRuleTest(){
         StringBuilder sb = new StringBuilder();
         Facts facts = new Facts();
+        facts.put("sb",sb);
         Rules rules = new Rules();
-        rules.register(new AgeRule(sb));
+        rules.register(new AgeRule());
         RulesEngine rulesEngine = new DefaultRulesEngine();
 
         int age = 30;
@@ -54,8 +55,9 @@ public class DynamicRuleEngineDemoApplicationTests {
     public void unitRuleGroupTest(){
         StringBuilder sb = new StringBuilder();
         Facts facts = new Facts();
+        facts.put("sb",sb);
         Rules rules = new Rules();
-        rules.register(new EnrollUnitRuleGroup(new AgeRule(sb), new GenderRule(sb)));
+        rules.register(new EnrollUnitRuleGroup(new AgeRule(), new GenderRule()));
         RulesEngine rulesEngine = new DefaultRulesEngine();
 
         int age = 30;
@@ -88,8 +90,9 @@ public class DynamicRuleEngineDemoApplicationTests {
     public void conditionRuleGroupTest(){
         StringBuilder sb = new StringBuilder();
         Facts facts = new Facts();
+        facts.put("sb",sb);
         Rules rules = new Rules();
-        rules.register(new EnrollConditionalRuleGroup(new AgeRule(sb), new GenderRule(sb)));
+        rules.register(new EnrollConditionalRuleGroup(new AgeRule(), new GenderRule()));
         RulesEngine rulesEngine = new DefaultRulesEngine();
 
         int age = 30;
@@ -122,8 +125,9 @@ public class DynamicRuleEngineDemoApplicationTests {
     public void activationRuleGroupTest(){
         StringBuilder sb = new StringBuilder();
         Facts facts = new Facts();
+        facts.put("sb",sb);
         Rules rules = new Rules();
-        rules.register(new EnrollActivationRuleGroup(new AgeRule(sb), new GenderRule(sb)));
+        rules.register(new EnrollActivationRuleGroup(new AgeRule(), new GenderRule()));
         RulesEngine rulesEngine = new DefaultRulesEngine();
 
         int age = 30;
@@ -153,6 +157,7 @@ public class DynamicRuleEngineDemoApplicationTests {
     public void salaryTest() throws Exception {
         StringBuilder sb = new StringBuilder();
         Facts facts = new Facts();
+        facts.put("sb",sb);
         int age = 30;
         String gender = "male";
         facts.put("age",age);
@@ -162,7 +167,7 @@ public class DynamicRuleEngineDemoApplicationTests {
         MVELRuleFactory ruleFactory = new MVELRuleFactory(new YamlRuleDefinitionReader());
         Rule salaryRule = ruleFactory.createRule(new FileReader(new ClassPathResource("salary-rule.yml").getFile()));
         Rules rules = new Rules();
-        rules.register(new EnrollUnitRuleGroup(new AgeRule(sb), new GenderRule(sb), salaryRule));
+        rules.register(new EnrollUnitRuleGroup(new AgeRule(), new GenderRule(), salaryRule));
         RulesEngine rulesEngine = new DefaultRulesEngine();
         rulesEngine.fire(rules,facts);
         System.out.println(sb.toString());
