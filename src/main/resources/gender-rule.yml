@@ -1,0 +1,6 @@
+name: "gender rule"
+description: "只要男性"
+priority: 5
+condition: "gender.equalsIgnoreCase(\"male\")"
+actions:
+  - "((StringBuilder)sb).append(\"YAML Rule: salary=\"+ salary +\" matched\");"

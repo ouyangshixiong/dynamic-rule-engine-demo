@@ -1,0 +1,6 @@
+name: "age rule"
+description: "年龄大于30岁不要"
+priority: 0
+condition: "age <= 30"
+actions:
+  - "((StringBuilder)sb).append(\"YAML Rule: age=\"+ age +\" matched\");"
