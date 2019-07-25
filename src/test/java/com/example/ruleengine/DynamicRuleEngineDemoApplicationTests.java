@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -154,6 +155,9 @@ public class DynamicRuleEngineDemoApplicationTests {
     }
 
     @Test
+    /*
+     * 测试从yaml文件中读取规则
+     */
     public void salaryTest() throws Exception {
         StringBuilder sb = new StringBuilder();
         Facts facts = new Facts();
@@ -166,6 +170,35 @@ public class DynamicRuleEngineDemoApplicationTests {
 
         MVELRuleFactory ruleFactory = new MVELRuleFactory(new YamlRuleDefinitionReader());
         Rule salaryRule = ruleFactory.createRule(new FileReader(new ClassPathResource("salary-rule.yml").getFile()));
+        Rules rules = new Rules();
+        rules.register(new EnrollUnitRuleGroup(new AgeRule(), new GenderRule(), salaryRule));
+        RulesEngine rulesEngine = new DefaultRulesEngine();
+        rulesEngine.fire(rules,facts);
+        System.out.println(sb.toString());
+    }
+
+    @Test
+    /*
+     * 测试从inputStream中读取规则
+     */
+    public void inputStreamTest() throws Exception {
+        StringBuilder sb = new StringBuilder();
+        Facts facts = new Facts();
+        facts.put("sb",sb);
+        int age = 30;
+        String gender = "male";
+        facts.put("age",age);
+        facts.put("gender",gender);
+        facts.put("salary",900);
+        String stringRule = "name: \"salary rule\"\n" +
+                "description: \"工资大于1000不要\"\n" +
+                "priority: 20\n" +
+                "condition: \"salary <= 1000\"\n" +
+                "actions:\n" +
+                "  - \"((StringBuilder)sb).append(\\\"YAML Rule: salary=\\\"+ salary +\\\" matched\\\");\"";
+
+        MVELRuleFactory ruleFactory = new MVELRuleFactory(new YamlRuleDefinitionReader());
+        Rule salaryRule = ruleFactory.createRule(new StringReader(stringRule));
         Rules rules = new Rules();
         rules.register(new EnrollUnitRuleGroup(new AgeRule(), new GenderRule(), salaryRule));
         RulesEngine rulesEngine = new DefaultRulesEngine();

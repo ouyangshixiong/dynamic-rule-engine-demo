@@ -12,7 +12,7 @@ public class AgeRule {
 
     @Condition
     public boolean above30(@Fact("age") int age ){
-        return age > 30;
+        return age <= 30;
     }
 
     @Action
