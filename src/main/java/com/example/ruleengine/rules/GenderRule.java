@@ -10,6 +10,12 @@ import org.jeasy.rules.api.Facts;
 @Rule
 public class GenderRule {
 
+    private StringBuilder sb;
+
+    public GenderRule(StringBuilder sb) {
+        this.sb = sb;
+    }
+
     @Condition
     public boolean onlyMale(@Fact("gender") String gender ){
         return gender.equalsIgnoreCase("male")?true:false;
@@ -17,7 +23,7 @@ public class GenderRule {
 
     @Action
     public void printGender(Facts facts){
-        System.out.println("gender is " + facts.get("gender") +", pass GenderRule");
+        sb.append("gender is " + facts.get("gender") +", pass GenderRule" + "\n");
     }
 
     @Priority

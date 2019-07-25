@@ -10,6 +10,12 @@ import org.jeasy.rules.api.Facts;
 @Rule
 public class AgeRule {
 
+    private StringBuilder sb;
+
+    public AgeRule(StringBuilder sb) {
+        this.sb = sb;
+    }
+
     @Condition
     public boolean above30(@Fact("age") int age ){
         return age > 30 ? false : true;
@@ -17,7 +23,7 @@ public class AgeRule {
 
     @Action
     public void printAge(Facts facts){
-        System.out.println("age is " + facts.get("age") +", pass AgeRule");
+        sb.append("age is " + facts.get("age") +", pass AgeRule" + "\n");
     }
 
     @Priority
