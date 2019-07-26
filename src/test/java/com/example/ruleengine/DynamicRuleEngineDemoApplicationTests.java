@@ -1,5 +1,8 @@
 package com.example.ruleengine;
 
+import com.example.ruleengine.dynamicrules.DbRulesGroupLoaderFactory;
+import com.example.ruleengine.dynamicrules.DbRulesGroupLoader;
+import com.example.ruleengine.dynamicrules.RulesGroupType;
 import com.example.ruleengine.rules.*;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rule;
@@ -10,14 +13,12 @@ import org.jeasy.rules.mvel.MVELRuleFactory;
 import org.jeasy.rules.support.YamlRuleDefinitionReader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mvel2.MVEL;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.StringReader;
 
 @RunWith(SpringRunner.class)
@@ -202,6 +203,27 @@ public class DynamicRuleEngineDemoApplicationTests {
         Rules rules = new Rules();
         rules.register(new EnrollUnitRuleGroup(new AgeRule(), new GenderRule(), salaryRule));
         RulesEngine rulesEngine = new DefaultRulesEngine();
+        rulesEngine.fire(rules,facts);
+        System.out.println(sb.toString());
+    }
+
+    @Autowired
+    DbRulesGroupLoaderFactory dbRulesGroupLoaderFactory;
+
+    @Test
+    public void dbRulesTest(){
+        StringBuilder sb = new StringBuilder();
+        Facts facts = new Facts();
+        facts.put("sb",sb);
+        int age = 30;
+        int salary = 900;
+        facts.put("age",age);
+        facts.put("salary",salary);
+        sb.append("unitRuleGroupTest------- fire rule engine with age=" + age + " salary=" + salary +"\n");
+        RulesEngine rulesEngine = new DefaultRulesEngine();
+        Long businessRuleDefinitionId = 1L;
+        DbRulesGroupLoader loader = dbRulesGroupLoaderFactory.getLoader(RulesGroupType.UnitRulesGroup);
+        Rules rules = loader.doLoad(businessRuleDefinitionId);
         rulesEngine.fire(rules,facts);
         System.out.println(sb.toString());
     }

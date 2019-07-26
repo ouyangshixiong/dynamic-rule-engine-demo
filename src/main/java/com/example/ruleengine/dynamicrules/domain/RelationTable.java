@@ -18,7 +18,6 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @ToString
-@Builder
 public class RelationTable implements Serializable {
     private static final long serialVersionUID = 1L;
 

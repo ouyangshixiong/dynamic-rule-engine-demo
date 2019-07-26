@@ -6,9 +6,6 @@ import com.example.ruleengine.dynamicrules.domain.RelationTable;
 import com.example.ruleengine.dynamicrules.repository.BusinessRuleDefinitionRepository;
 import com.example.ruleengine.dynamicrules.repository.DynamicRuleRepository;
 import com.example.ruleengine.dynamicrules.repository.RelationTableRepository;
-import com.example.ruleengine.rules.AgeRule;
-import com.example.ruleengine.rules.EnrollUnitRuleGroup;
-import com.example.ruleengine.rules.GenderRule;
 import org.jeasy.rules.api.Rule;
 import org.jeasy.rules.api.Rules;
 import org.jeasy.rules.mvel.MVELRuleFactory;
@@ -16,6 +13,7 @@ import org.jeasy.rules.support.YamlRuleDefinitionReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -26,11 +24,10 @@ import java.util.Optional;
  * @author alexouyang
  * @Date 2019-07-25
  */
-public class AbstractRulesGroupLoader implements RulesGroupLoader {
+@Component
+public abstract class AbstractDbRulesGroupLoader implements DbRulesGroupLoader {
 
-    private static final Logger log = LoggerFactory.getLogger(AbstractRulesGroupLoader.class);
-
-    private Long businessRuleDefinitionId;
+    private static final Logger log = LoggerFactory.getLogger(AbstractDbRulesGroupLoader.class);
 
     @Autowired
     private DynamicRuleRepository dynamicRuleRepository;
@@ -41,26 +38,16 @@ public class AbstractRulesGroupLoader implements RulesGroupLoader {
     @Autowired
     private BusinessRuleDefinitionRepository businessRuleDefinitionRepository;
 
-    public Long getBusinessRuleDefinitionId() {
-        return businessRuleDefinitionId;
-    }
-
-    public void setBusinessRuleDefinitionId(Long businessRuleDefinitionId) {
-        this.businessRuleDefinitionId = businessRuleDefinitionId;
-    }
-
     @Override
-    public void load() {
+    public abstract Rules doLoad(Long businessRuleDefinitionId);
 
-    }
-
-    protected List<Rule> selectRulesFromDB(){
+    protected List<Rule> selectRulesFromDB(Long businessRuleDefinitionId){
         List<Rule> rules = new ArrayList<>();
 
         Optional<BusinessRuleDefinition> rs = businessRuleDefinitionRepository.findById(businessRuleDefinitionId);
         if( rs.isPresent() ){
             BusinessRuleDefinition businessRuleDefinition = rs.get();
-            log.info("success load businessRuleDefinition =" + businessRuleDefinition.toString());
+            log.info("success doLoad businessRuleDefinition =" + businessRuleDefinition.toString());
             Optional<List<RelationTable>> rs2 = relationTableRepository.findAllByBusinessRuleDefinitionId(businessRuleDefinition.getId());
             if(rs2.isPresent()){
                 List<RelationTable> relationTableList = rs2.get();
