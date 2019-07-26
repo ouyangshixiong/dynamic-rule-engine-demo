@@ -8,5 +8,5 @@ import org.jeasy.rules.api.Rules;
  */
 public interface DbRulesGroupLoader {
 
-    Rules doLoad(Long businessRuleDefinitionId);
+    Rules doLoad(Long rulesGroupInfoId);
 }

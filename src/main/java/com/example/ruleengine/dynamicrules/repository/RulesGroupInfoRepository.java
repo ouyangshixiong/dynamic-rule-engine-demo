@@ -1,6 +1,6 @@
 package com.example.ruleengine.dynamicrules.repository;
 
-import com.example.ruleengine.dynamicrules.domain.BusinessRuleDefinition;
+import com.example.ruleengine.dynamicrules.domain.RulesGroupInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  * @Date 2019-07-25
  */
 @Repository
-public interface BusinessRuleDefinitionRepository extends JpaRepository<BusinessRuleDefinition,Long> {
+public interface RulesGroupInfoRepository extends JpaRepository<RulesGroupInfo,Long> {
 }

@@ -31,7 +31,8 @@ public class Swagger2 {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("Dynamic Rule Engine Demo")
-                .description("演示Java动态规则引擎的基础能力\n年龄规则定义：如果大于30岁就不符合要求\n 性别规则定义：如果不是男性就不符合要求\n 且年龄规则优先级高于性别规则")
+                .description("演示Java动态规则引擎的基础能力\n年龄规则定义：30岁以下符合要求\n " +
+                        "性别规则定义：只有男性符合要求\n 且年龄规则优先级高于性别规则\n薪水规则定义(只在动态规则演示中):低于1000元才符合要求")
                 .version("1.0")
                 .build();
     }

@@ -1,9 +1,9 @@
 package com.example.ruleengine.dynamicrules;
 
-import com.example.ruleengine.dynamicrules.domain.BusinessRuleDefinition;
+import com.example.ruleengine.dynamicrules.domain.RulesGroupInfo;
 import com.example.ruleengine.dynamicrules.domain.DynamicRule;
-import com.example.ruleengine.dynamicrules.domain.RelationTable;
-import com.example.ruleengine.dynamicrules.repository.BusinessRuleDefinitionRepository;
+import com.example.ruleengine.dynamicrules.domain.RulesGroupRelationTable;
+import com.example.ruleengine.dynamicrules.repository.RulesGroupInfoRepository;
 import com.example.ruleengine.dynamicrules.repository.DynamicRuleRepository;
 import com.example.ruleengine.dynamicrules.repository.RelationTableRepository;
 import org.jeasy.rules.api.Rule;
@@ -36,23 +36,23 @@ public abstract class AbstractDbRulesGroupLoader implements DbRulesGroupLoader {
     private RelationTableRepository relationTableRepository;
 
     @Autowired
-    private BusinessRuleDefinitionRepository businessRuleDefinitionRepository;
+    private RulesGroupInfoRepository rulesGroupInfoRepository;
 
     @Override
-    public abstract Rules doLoad(Long businessRuleDefinitionId);
+    public abstract Rules doLoad(Long rulesGroupInfoId);
 
-    protected List<Rule> selectRulesFromDB(Long businessRuleDefinitionId){
+    protected List<Rule> selectRulesFromDB(Long rulesGroupInfoId){
         List<Rule> rules = new ArrayList<>();
 
-        Optional<BusinessRuleDefinition> rs = businessRuleDefinitionRepository.findById(businessRuleDefinitionId);
+        Optional<RulesGroupInfo> rs = rulesGroupInfoRepository.findById(rulesGroupInfoId);
         if( rs.isPresent() ){
-            BusinessRuleDefinition businessRuleDefinition = rs.get();
-            log.info("success doLoad businessRuleDefinition =" + businessRuleDefinition.toString());
-            Optional<List<RelationTable>> rs2 = relationTableRepository.findAllByBusinessRuleDefinitionId(businessRuleDefinition.getId());
+            RulesGroupInfo rulesGroupInfo = rs.get();
+            log.info("success doLoad rulesGroupInfo =" + rulesGroupInfo.toString());
+            Optional<List<RulesGroupRelationTable>> rs2 = relationTableRepository.findAllByRulesGroupInfoId(rulesGroupInfo.getId());
             if(rs2.isPresent()){
-                List<RelationTable> relationTableList = rs2.get();
-                for( RelationTable relationTable : relationTableList){
-                    Long dynamicRuleId = relationTable.getDynamicRuleId();
+                List<RulesGroupRelationTable> rulesGroupRelationTableList = rs2.get();
+                for( RulesGroupRelationTable rulesGroupRelationTable : rulesGroupRelationTableList){
+                    Long dynamicRuleId = rulesGroupRelationTable.getDynamicRuleId();
                     Optional<DynamicRule> rs3 = dynamicRuleRepository.findById(dynamicRuleId);
                     if( rs3.isPresent() ){
                         DynamicRule dynamicRule = rs3.get();
@@ -70,11 +70,11 @@ public abstract class AbstractDbRulesGroupLoader implements DbRulesGroupLoader {
 
                 }
             }else{
-                log.error("找不到对应的关系表记录 businessRuleDefinition=" + businessRuleDefinition.getId());
+                log.error("找不到对应的关系表记录 rulesGroupInfo=" + rulesGroupInfo.getId());
             }
 
         }else{
-            log.error("找不到businessRuleDefinition id=" + businessRuleDefinitionId);
+            log.error("找不到businessRuleDefinition id=" + rulesGroupInfoId);
         }
 
         return rules;

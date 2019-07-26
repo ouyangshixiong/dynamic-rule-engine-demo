@@ -20,9 +20,9 @@ public class UnitDbRulesGroupLoader extends AbstractDbRulesGroupLoader {
     private static Logger log = LoggerFactory.getLogger(UnitDbRulesGroupLoader.class);
 
     @Override
-    public Rules doLoad(Long businessRuleDefinitionId) {
+    public Rules doLoad(Long rulesGroupInfoId) {
         //load rules from db--->ruleengine
-        List<Rule> ruleList = selectRulesFromDB(businessRuleDefinitionId);
+        List<Rule> ruleList = selectRulesFromDB(rulesGroupInfoId);
         log.info("调试：看看有几个rule被加载了" + ruleList);
         Rules rules = new Rules();
         EnrollUnitRuleGroup enrollUnitRuleGroup = new EnrollUnitRuleGroup();

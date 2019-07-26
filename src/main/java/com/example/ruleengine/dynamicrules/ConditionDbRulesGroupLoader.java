@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class ConditionDbRulesGroupLoader extends AbstractDbRulesGroupLoader {
 
     @Override
-    public Rules doLoad(Long businessRuleDefinitionId) {
+    public Rules doLoad(Long rulesGroupInfoId) {
         // TODO
         return null;
     }

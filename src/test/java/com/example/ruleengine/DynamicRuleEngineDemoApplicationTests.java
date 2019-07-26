@@ -218,12 +218,13 @@ public class DynamicRuleEngineDemoApplicationTests {
         int age = 30;
         int salary = 900;
         facts.put("age",age);
+        facts.put("gender","male");
         facts.put("salary",salary);
         sb.append("unitRuleGroupTest------- fire rule engine with age=" + age + " salary=" + salary +"\n");
         RulesEngine rulesEngine = new DefaultRulesEngine();
-        Long businessRuleDefinitionId = 1L;
+        Long rulesGroupInfoId = 1L;
         DbRulesGroupLoader loader = dbRulesGroupLoaderFactory.getLoader(RulesGroupType.UnitRulesGroup);
-        Rules rules = loader.doLoad(businessRuleDefinitionId);
+        Rules rules = loader.doLoad(rulesGroupInfoId);
         rulesEngine.fire(rules,facts);
         System.out.println(sb.toString());
     }

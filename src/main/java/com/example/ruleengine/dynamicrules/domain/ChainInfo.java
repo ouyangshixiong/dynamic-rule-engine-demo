@@ -1,34 +1,30 @@
 package com.example.ruleengine.dynamicrules.domain;
 
-import com.example.ruleengine.dynamicrules.RulesGroupType;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * @author alexouyang
- * 2019-07-25
+ * @Date 2019-07-26
  */
 @Entity
-@Table(name="dynamic_rule")
+@Table(name="chain_info")
 @Data
 @NoArgsConstructor
 @ToString
-public class DynamicRule implements Serializable {
-
+public class ChainInfo {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "rule_name")
-    private String ruleName;
+    @Column(name = "chain_name")
+    private String chainName;
 
-    @Column(name = "content")
-    private String content;
+    @Column(name = "chain_desc")
+    private String chainDesc;
 }

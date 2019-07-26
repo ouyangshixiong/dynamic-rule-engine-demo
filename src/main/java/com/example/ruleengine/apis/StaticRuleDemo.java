@@ -8,6 +8,7 @@ import org.jeasy.rules.api.RulesEngine;
 import org.jeasy.rules.core.DefaultRulesEngine;
 import org.jeasy.rules.support.CompositeRule;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -22,24 +23,10 @@ public class StaticRuleDemo {
      **/
     @ApiOperation(value="unit规则组演示，所有规则是 AND(&&) 的关系",notes = "Java Rule")
     @GetMapping("unit-rule-group-test")
-    public String unitRuleGroupTest(){
+    public String unitRuleGroupTest(@RequestParam Integer age, @RequestParam String gender){
         StringBuilder sb = new StringBuilder();
-
-        int age = 30;
-        String gender = "male";
         sb.append("unitRuleGroupTest------- fire rule engine with age=" + age + " gender=" + gender +"\n");
         runRuleEngine(age,gender,sb,new EnrollUnitRuleGroup(new AgeRule(), new GenderRule()));
-
-        age = 31;
-        gender = "male";
-        sb.append("unitRuleGroupTest------- fire rule engine with age=" + age + " gender=" + gender +"\n");
-        runRuleEngine(age,gender,sb,new EnrollUnitRuleGroup(new AgeRule(), new GenderRule()));
-
-        age = 30;
-        gender = "female";
-        sb.append("unitRuleGroupTest------- fire rule engine with age=" + age + " gender=" + gender +"\n");
-        runRuleEngine(age,gender,sb,new EnrollUnitRuleGroup(new AgeRule(), new GenderRule()));
-
         return sb.toString();
     }
 
@@ -48,24 +35,10 @@ public class StaticRuleDemo {
      **/
     @ApiOperation(value="condition规则组演示，满足条件立即执行动作，一旦不满足跳过剩下规则",notes = "Java Rule")
     @GetMapping("condition-rule-group-test")
-    public String conditionRuleGroupTest(){
+    public String conditionRuleGroupTest(@RequestParam Integer age, @RequestParam String gender){
         StringBuilder sb = new StringBuilder();
-
-        int age = 30;
-        String gender = "male";
         sb.append("conditionRuleGroupTest------- fire rule engine with age=" + age + " gender=" + gender +"\n");
         runRuleEngine(age,gender,sb,new EnrollConditionalRuleGroup(new AgeRule(), new GenderRule()));
-
-        age = 31;
-        gender = "male";
-        sb.append("conditionRuleGroupTest------- fire rule engine with age=" + age + " gender=" + gender +"\n");
-        runRuleEngine(age,gender,sb,new EnrollConditionalRuleGroup(new AgeRule(), new GenderRule()));
-
-        age = 30;
-        gender = "female";
-        sb.append("conditionRuleGroupTest------- fire rule engine with age=" + age + " gender=" + gender +"\n");
-        runRuleEngine(age,gender,sb,new EnrollConditionalRuleGroup(new AgeRule(), new GenderRule()));
-
         return sb.toString();
     }
 
@@ -74,24 +47,10 @@ public class StaticRuleDemo {
      */
     @ApiOperation(value="activation规则组演示，所有规则是 XOR 的关系",notes = "Java Rule")
     @GetMapping("activation-rule-group-test")
-    public String activationRuleGroupTest(){
+    public String activationRuleGroupTest(@RequestParam Integer age, @RequestParam String gender){
         StringBuilder sb = new StringBuilder();
-
-        int age = 30;
-        String gender = "male";
         sb.append("activationRuleGroupTest------- fire rule engine with age=" + age + " gender=" + gender +"\n");
         runRuleEngine(age,gender,sb,new EnrollActivationRuleGroup(new AgeRule(), new GenderRule()));
-
-        age = 31;
-        gender = "male";
-        sb.append("activationRuleGroupTest------- fire rule engine with age=" + age + " gender=" + gender +"\n");
-        runRuleEngine(age,gender,sb,new EnrollActivationRuleGroup(new AgeRule(), new GenderRule()));
-
-        age = 30;
-        gender = "female";
-        sb.append("activationRuleGroupTest------- fire rule engine with age=" + age + " gender=" + gender +"\n");
-        runRuleEngine(age,gender,sb,new EnrollActivationRuleGroup(new AgeRule(), new GenderRule()));
-
         return sb.toString();
     }
 

@@ -14,21 +14,21 @@ import java.io.Serializable;
  * @Date 2019-07-25
  */
 @Entity
-@Table(name="business_rule_definition")
+@Table(name="rules_group_relation_table")
 @Data
 @NoArgsConstructor
 @ToString
-public class BusinessRuleDefinition implements Serializable {
+public class RulesGroupRelationTable implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "business_rule_name")
-    private String businessRuleName;
+    @Column(name = "rules_group_info_id")
+    private Long rulesGroupInfoId;
 
-    @Column(name = "business_rule_desc")
-    private String businessRuleDesc;
+    @Column(name = "dynamic_rule_id")
+    private Long dynamicRuleId;
 
 }
