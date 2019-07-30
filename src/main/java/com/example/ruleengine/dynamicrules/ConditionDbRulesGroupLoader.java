@@ -1,7 +1,12 @@
 package com.example.ruleengine.dynamicrules;
 
+import com.example.ruleengine.rules.EnrollActivationRuleGroup;
+import com.example.ruleengine.rules.EnrollConditionalRuleGroup;
+import org.jeasy.rules.api.Rule;
 import org.jeasy.rules.api.Rules;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * @author alexouyang
@@ -12,7 +17,14 @@ public class ConditionDbRulesGroupLoader extends AbstractDbRulesGroupLoader {
 
     @Override
     public Rules doLoad(Long rulesGroupInfoId) {
-        // TODO
-        return null;
+        //load rules from db--->ruleengine
+        List<Rule> ruleList = selectRulesFromDB(rulesGroupInfoId);
+        Rules rules = new Rules();
+        EnrollConditionalRuleGroup enrollConditionalRuleGroup = new EnrollConditionalRuleGroup();
+        for(Rule rule : ruleList){
+            enrollConditionalRuleGroup.addRule(rule);
+        }
+        rules.register(enrollConditionalRuleGroup);
+        return rules;
     }
 }

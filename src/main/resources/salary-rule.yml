@@ -3,4 +3,4 @@ description: "工资大于1000不要"
 priority: 20
 condition: "salary <= 1000"
 actions:
-  - "((StringBuilder)sb).append(\"YAML Rule: salary=\"+ salary +\" matched\");"
+  - "((StringBuilder)sb).append(\"YAML Rule: salary=\"+ salary +\" matched\n\");"

@@ -1,5 +1,6 @@
 package com.example.ruleengine;
 
+import com.example.ruleengine.domain.SimCardGroup;
 import com.example.ruleengine.dynamicrules.DbRulesGroupLoaderFactory;
 import com.example.ruleengine.dynamicrules.DbRulesGroupLoader;
 import com.example.ruleengine.dynamicrules.RulesGroupType;
@@ -20,6 +21,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.FileReader;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -228,5 +233,26 @@ public class DynamicRuleEngineDemoApplicationTests {
         rulesEngine.fire(rules,facts);
         System.out.println(sb.toString());
     }
+
+    @Test
+    public void dbRules2Test(){
+        Facts facts = new Facts();
+        List<SimCardGroup> matchedSimCardGroups = new ArrayList<>();
+        facts.put("matchedSimCardGroups",matchedSimCardGroups);
+        facts.put("country","USA");
+        facts.put("isVIP",false);
+        facts.put("partner","USA");
+        System.out.println("unitRuleGroupTest------- fire rule engine with country=" + facts.get("country") + " isVIP="
+                + facts.get("isVIP") + " partner=" + facts.get("partner") +"\n");
+        RulesEngine rulesEngine = new DefaultRulesEngine();
+        Long rulesGroupInfoId = 2L;
+        DbRulesGroupLoader loader = dbRulesGroupLoaderFactory.getLoader(RulesGroupType.ActivationRulesGroup);
+        Rules rules = loader.doLoad(rulesGroupInfoId);
+        rulesEngine.fire(rules,facts);
+        for(int i=0; i<matchedSimCardGroups.size(); i++){
+            System.out.println( (i+1) + ": " + matchedSimCardGroups.get(i).toString());
+        }
+    }
+
 
 }
