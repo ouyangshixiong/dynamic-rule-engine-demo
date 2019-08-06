@@ -1,9 +1,9 @@
 package com.example.ruleengine;
 
 import com.example.ruleengine.domain.SimCardGroup;
-import com.example.ruleengine.dynamicrules.DbRulesGroupLoaderFactory;
-import com.example.ruleengine.dynamicrules.DbRulesGroupLoader;
-import com.example.ruleengine.dynamicrules.RulesGroupType;
+import com.example.ruleengine.loader.rulesgroup.DbRulesGroupLoaderFactory;
+import com.example.ruleengine.loader.rulesgroup.DbRulesGroupLoader;
+import com.example.ruleengine.loader.rulesgroup.RulesGroupType;
 import com.example.ruleengine.rules.*;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rule;
@@ -23,8 +23,6 @@ import java.io.FileReader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

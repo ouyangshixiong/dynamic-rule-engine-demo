@@ -1,6 +1,6 @@
-package com.example.ruleengine.dynamicrules.repository;
+package com.example.ruleengine.loader.rulesgroup.repository;
 
-import com.example.ruleengine.dynamicrules.domain.RulesGroupInfo;
+import com.example.ruleengine.loader.rulesgroup.domain.RulesGroupInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

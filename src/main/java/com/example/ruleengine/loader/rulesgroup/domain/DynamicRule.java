@@ -1,7 +1,5 @@
-package com.example.ruleengine.dynamicrules.domain;
+package com.example.ruleengine.loader.rulesgroup.domain;
 
-import com.example.ruleengine.dynamicrules.RulesGroupType;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;

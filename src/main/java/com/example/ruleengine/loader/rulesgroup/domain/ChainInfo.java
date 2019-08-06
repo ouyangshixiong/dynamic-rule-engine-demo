@@ -1,4 +1,4 @@
-package com.example.ruleengine.dynamicrules.domain;
+package com.example.ruleengine.loader.rulesgroup.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

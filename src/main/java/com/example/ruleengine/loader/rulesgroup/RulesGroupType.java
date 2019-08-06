@@ -1,4 +1,4 @@
-package com.example.ruleengine.dynamicrules;
+package com.example.ruleengine.loader.rulesgroup;
 
 /**
  * @author alexouyang

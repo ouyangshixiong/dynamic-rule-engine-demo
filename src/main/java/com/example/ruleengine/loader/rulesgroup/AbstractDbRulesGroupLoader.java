@@ -1,11 +1,11 @@
-package com.example.ruleengine.dynamicrules;
+package com.example.ruleengine.loader.rulesgroup;
 
-import com.example.ruleengine.dynamicrules.domain.RulesGroupInfo;
-import com.example.ruleengine.dynamicrules.domain.DynamicRule;
-import com.example.ruleengine.dynamicrules.domain.RulesGroupRelationTable;
-import com.example.ruleengine.dynamicrules.repository.RulesGroupInfoRepository;
-import com.example.ruleengine.dynamicrules.repository.DynamicRuleRepository;
-import com.example.ruleengine.dynamicrules.repository.RelationTableRepository;
+import com.example.ruleengine.loader.rulesgroup.domain.RulesGroupInfo;
+import com.example.ruleengine.loader.rulesgroup.domain.DynamicRule;
+import com.example.ruleengine.loader.rulesgroup.domain.RulesGroupRelationTable;
+import com.example.ruleengine.loader.rulesgroup.repository.RulesGroupInfoRepository;
+import com.example.ruleengine.loader.rulesgroup.repository.DynamicRuleRepository;
+import com.example.ruleengine.loader.rulesgroup.repository.RelationTableRepository;
 import org.jeasy.rules.api.Rule;
 import org.jeasy.rules.api.Rules;
 import org.jeasy.rules.mvel.MVELRuleFactory;

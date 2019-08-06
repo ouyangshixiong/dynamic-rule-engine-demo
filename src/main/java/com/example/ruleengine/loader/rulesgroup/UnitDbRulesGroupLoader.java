@@ -1,4 +1,4 @@
-package com.example.ruleengine.dynamicrules;
+package com.example.ruleengine.loader.rulesgroup;
 
 import com.example.ruleengine.rules.EnrollUnitRuleGroup;
 import org.jeasy.rules.api.Rule;
@@ -6,7 +6,6 @@ import org.jeasy.rules.api.Rules;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

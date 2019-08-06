@@ -1,7 +1,6 @@
-package com.example.ruleengine.dynamicrules;
+package com.example.ruleengine.loader.rulesgroup;
 
 import com.example.ruleengine.rules.EnrollActivationRuleGroup;
-import com.example.ruleengine.rules.EnrollUnitRuleGroup;
 import org.jeasy.rules.api.Rule;
 import org.jeasy.rules.api.Rules;
 import org.springframework.stereotype.Component;
